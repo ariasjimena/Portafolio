@@ -1,39 +1,56 @@
-import { motion as Motion } from "framer-motion";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
 export default function Contact() {
   return (
-    <section className="py-32 px-6 bg-[#F9F7F3] text-center">
-      <div className="max-w-2xl mx-auto">
+    <section
+      id="contact"
+      className="py-36 px-6 bg-[#F9F7F3]"
+      aria-label="Contacto profesional"
+    >
+      <div className="max-w-2xl mx-auto text-center">
 
-        <Motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
         >
           {/* Título */}
-          <h2 className="text-3xl md:text-4xl font-semibold text-[#2E2E2E] mb-6">
-            Contacto
+          <h2 className="text-3xl md:text-4xl font-semibold text-[#1F2933] mb-6">
+            Trabajemos juntos
           </h2>
 
-          {/* Línea pastel */}
-          <div className="w-14 h-[2px] bg-[#C7C3E3] mx-auto mb-10 rounded-full"></div>
+          {/* Línea */}
+          <div className="w-14 h-[2px] bg-[#C7C3E3] mx-auto mb-10 rounded-full" />
 
-          {/* Texto */}
-          <p className="text-[#6B6B6B] mb-12 text-lg">
-            ¿Hablamos sobre una oportunidad o colaboramos en tu próximo proyecto?
+          {/* Copy */}
+          <p className="text-[#6B7280] text-lg leading-relaxed mb-14">
+            Estoy disponible para oportunidades freelance, colaboraciones
+            creativas o proyectos a largo plazo. Si tienes una idea en mente,
+            conversemos.
           </p>
 
-          {/* Botón */}
+          {/* CTA */}
           <a
             href="mailto:jimenaarias02@hotmail.com"
-            className="inline-block px-10 py-3 rounded-full bg-[#E8B4BC] 
-                       text-white font-medium shadow-sm
-                       hover:bg-[#e3a6b0] transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2
+                       px-12 py-3 rounded-full bg-[#E8B4BC]
+                       text-white font-medium shadow-md
+                       hover:bg-[#e3a6b0] hover:shadow-lg
+                       transition-all duration-300"
           >
-            Escríbeme
+            Contactar
           </a>
-        </Motion.div>
+        </motion.div>
 
       </div>
     </section>

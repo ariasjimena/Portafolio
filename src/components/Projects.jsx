@@ -1,69 +1,79 @@
 import { projects } from "../data/projects";
-import { motion as Motion } from "framer-motion";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
 export default function Projects() {
   return (
     <section
       id="projects"
       className="py-32 px-6 bg-[#F9F7F3]"
+      aria-label="Proyectos destacados"
     >
       <div className="max-w-6xl mx-auto">
 
-        {/* Título */}
-        <Motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+        {/* Header */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-semibold text-[#2E2E2E] mb-4">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[#1F2933]">
             Proyectos
           </h2>
-          <div className="w-14 h-[2px] bg-[#C7C3E3] mx-auto rounded-full"></div>
-        </Motion.div>
+          <div className="w-14 h-[2px] bg-[#C7C3E3] mx-auto mt-6 rounded-full" />
+        </motion.div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-14">
           {projects.map((p, i) => (
-            <Motion.div
+            <motion.article
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              className="bg-white rounded-3xl shadow-sm hover:shadow-md transition overflow-hidden"
+              transition={{ delay: i * 0.1 }}
+              className="group bg-white rounded-3xl overflow-hidden border border-[#ECECEC]
+                         hover:shadow-xl transition-all duration-500"
             >
-              {/* Imagen */}
-              <a
-                href={p.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
+              {/* Imagen con overlay */}
+              <div className="relative overflow-hidden">
                 <img
                   src={p.image}
-                  alt={p.title}
-                  className="w-full h-56 object-cover hover:scale-[1.02] transition duration-500"
+                  alt={`Vista previa del proyecto ${p.title}`}
+                  className="w-full h-60 object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-              </a>
+
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-500" />
+              </div>
 
               {/* Contenido */}
-              <div className="p-8">
-                <h3 className="text-xl font-semibold text-[#2E2E2E] mb-3">
+              <div className="p-10">
+                <h3 className="text-xl font-semibold text-[#1F2933] mb-4">
                   {p.title}
                 </h3>
 
-                <p className="text-[#6B6B6B] mb-6">
+                <p className="text-[#6B7280] leading-relaxed mb-6">
                   {p.description}
                 </p>
 
                 {/* Stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-8">
                   {p.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="text-sm px-3 py-1 rounded-full bg-[#F1EEF8] text-[#5A5A5A]"
+                      className="text-xs tracking-wide px-3 py-1 rounded-full
+                                 bg-[#F1EEF8] text-[#4B5563]"
                     >
                       {tech}
                     </span>
@@ -71,27 +81,27 @@ export default function Projects() {
                 </div>
 
                 {/* Links */}
-                <div className="flex gap-6 text-sm">
+                <div className="flex gap-8 text-sm font-medium">
                   <a
                     href={p.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#E8B4BC] font-medium hover:underline"
+                    className="text-[#E8B4BC] hover:opacity-80 transition"
                   >
-                    Ver sitio
+                    Ver sitio →
                   </a>
 
                   <a
                     href={p.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#C7C3E3] font-medium hover:underline"
+                    className="text-[#C7C3E3] hover:opacity-80 transition"
                   >
-                    GitHub
+                    Código →
                   </a>
                 </div>
               </div>
-            </Motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

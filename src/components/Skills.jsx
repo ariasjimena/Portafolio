@@ -1,58 +1,85 @@
-import { motion as Motion } from "framer-motion";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
 export default function Skills() {
-  const skills = {
-    Frontend: ["React", "React Native", "Expo", "Bootstrap", "Tailwind"],
-    Backend: ["Node.js", "Express", "MongoDB"],
-    Tools: ["Git", "GitHub", "Postman"],
-  };
+  const skills = [
+    {
+      title: "Frontend",
+      items: ["React", "React Native", "Expo", "Bootstrap", "Tailwind"],
+    },
+    {
+      title: "Backend",
+      items: ["Node.js", "Express", "MongoDB"],
+    },
+    {
+      title: "Tools",
+      items: ["Git", "GitHub", "Postman"],
+    },
+  ];
 
   return (
-    <section className="py-32 px-6 bg-[#F6F4EF]">
-      <div className="max-w-5xl mx-auto text-center">
+    <section
+      id="skills"
+      className="py-32 px-6 bg-[#F6F4EF]"
+      aria-label="Habilidades técnicas"
+    >
+      <div className="max-w-5xl mx-auto">
 
-        {/* Título */}
-        <Motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+        {/* Header */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          className="mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-semibold text-[#2E2E2E] mb-4">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[#1F2933]">
             Habilidades
           </h2>
-          <div className="w-14 h-[2px] bg-[#C7C3E3] mx-auto rounded-full"></div>
-        </Motion.div>
+          <div className="w-14 h-[2px] bg-[#C7C3E3] mx-auto mt-6 rounded-full" />
+        </motion.div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-3 gap-10 text-left">
-          {Object.entries(skills).map(([title, items], i) => (
-            <Motion.div
-              key={title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+        <div className="grid md:grid-cols-3 gap-12">
+          {skills.map((group, i) => (
+            <motion.div
+              key={group.title}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-md transition"
+              transition={{ delay: i * 0.1 }}
+              className="group bg-white p-10 rounded-3xl border border-[#ECECEC]
+                         hover:border-[#C7C3E3] hover:shadow-lg transition-all duration-500"
             >
-              {/* Categoría */}
-              <h3 className="mb-6 font-medium text-[#E8B4BC] text-lg">
-                {title}
+              {/* Category */}
+              <h3 className="mb-8 text-lg font-medium text-[#E8B4BC]">
+                {group.title}
               </h3>
 
-              {/* Skills */}
+              {/* Items */}
               <ul className="flex flex-wrap gap-3">
-                {items.map((s) => (
+                {group.items.map((skill) => (
                   <li
-                    key={s}
-                    className="px-4 py-2 rounded-full text-sm bg-[#F1EEF8] text-[#5A5A5A]"
+                    key={skill}
+                    className="px-4 py-2 rounded-full text-sm
+                               bg-[#F1EEF8] text-[#4B5563]
+                               group-hover:bg-[#E8E4F8]
+                               transition-colors duration-300"
                   >
-                    {s}
+                    {skill}
                   </li>
                 ))}
               </ul>
-            </Motion.div>
+            </motion.div>
           ))}
         </div>
 
