@@ -1,13 +1,6 @@
 // data/projects.js
 export const projects = [
-  {
-    title: "Portfolio Web",
-    description: "Portafolio personal con diseño minimalista y animaciones suaves.",
-    stack: ["React", "Tailwind", "Framer Motion"],
-    image: "/projects/portafolio.png",
-    link: "https://tusitio.com",
-    github: "https://github.com/tuusuario/portfolio",
-  },
+ 
   {
     title: "Menu QR",
     description: "Aplicación de menú digital con panel administrativo.",
