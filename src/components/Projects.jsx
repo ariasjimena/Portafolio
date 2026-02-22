@@ -91,14 +91,6 @@ export default function Projects() {
                     Ver sitio →
                   </a>
 
-                  <a
-                    href={p.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#C7C3E3] hover:opacity-80 transition"
-                  >
-                    Código →
-                  </a>
                 </div>
               </div>
             </motion.article>
